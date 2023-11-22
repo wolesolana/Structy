@@ -62,6 +62,36 @@ class TestNode(unittest.TestCase):
     def test_sum_list_returns_zero_for_empty_list(self):
         self.assertEqual(Node(None).sum_list(), 0)
 
+    def test_reverse_list_returns_a_reversed_linked_list(self):
+        a = Node(2)
+        b = Node(8)
+        c = Node(3)
+        d = Node(-1)
+        e = Node(7)
+
+        a.next = b
+        b.next = c
+        c.next = d
+        d.next = e
+
+        a.reverse_list()
+
+        self.assertEqual(e.next, d)
+        self.assertEqual(d.next, c)
+        self.assertEqual(c.next, b)
+        self.assertEqual(b.next, a)
+        self.assertIsNone(a.next)
+
+    def test_reverse_list_for_a_single_node_list_returns_itself(self):
+        a = Node(2)
+
+        a.reverse_list()
+
+        self.assertIsNone(a.next)
+
+    def test_reverse_list_for_an_empty_list_returns_none(self):
+        self.assertIsNone(Node(None).reverse_list())
+
 
 if __name__ == "__main__":
     unittest.main()

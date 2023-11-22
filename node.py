@@ -21,3 +21,18 @@ class Node:
             head = head.next
 
         return sum
+
+    def reverse_list(self):
+        previous = None
+        current = self
+
+        if self.value is None:
+            return None
+
+        while current is not None:
+            next = current.next
+            current.next = previous
+            previous = current
+            current = next
+
+        return previous
