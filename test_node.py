@@ -92,6 +92,94 @@ class TestNode(unittest.TestCase):
     def test_reverse_list_for_an_empty_list_returns_none(self):
         self.assertIsNone(Node(None).reverse_list())
 
+    def test_zip_lists_combines_two_linked_lists_with_alternating_nodes(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        a.next = b
+        b.next = c
+
+        x = Node("x")
+        y = Node("y")
+        z = Node("z")
+        x.next = y
+        y.next = z
+
+        a.zip_lists(x)
+
+        self.assertEqual(a.next, x)
+        self.assertEqual(x.next, b)
+        self.assertEqual(b.next, y)
+        self.assertEqual(y.next, c)
+        self.assertEqual(c.next, z)
+        self.assertIsNone(z.next)
+
+    def test_zip_lists_for_two_list_of_different_lengths_alternates_correctly(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        d = Node("d")
+        e = Node("e")
+        f = Node("f")
+        a.next = b
+        b.next = c
+        c.next = d
+        d.next = e
+        e.next = f
+
+        x = Node("x")
+        y = Node("y")
+        z = Node("z")
+        x.next = y
+        y.next = z
+
+        a.zip_lists(x)
+
+        self.assertEqual(a.next, x)
+        self.assertEqual(x.next, b)
+        self.assertEqual(b.next, y)
+        self.assertEqual(y.next, c)
+        self.assertEqual(c.next, z)
+        self.assertEqual(z.next, d)
+        self.assertEqual(d.next, e)
+        self.assertEqual(e.next, f)
+        self.assertIsNone(f.next)
+
+    def test_zip_lists_alternates_correctly_when_the_first_list_is_shorter(self):
+        s = Node("s")
+        t = Node("t")
+        s.next = t
+
+        one = Node(1)
+        two = Node(2)
+        three = Node(3)
+        four = Node(4)
+        one.next = two
+        two.next = three
+        three.next = four
+
+        s.zip_lists(one)
+
+        self.assertEqual(s.next, one)
+        self.assertEqual(one.next, t)
+        self.assertEqual(t.next, two)
+        self.assertEqual(two.next, three)
+        self.assertEqual(three.next, four)
+        self.assertIsNone(four.next)
+
+    def test_zip_list_alternates_correctly_when_one_of_the_lists_is_singly_linked(self):
+        s = Node("s")
+        t = Node("t")
+        s.next = t
+
+        one = Node(1)
+
+        s.zip_lists(one)
+
+        self.assertEqual(s.next, one)
+        self.assertEqual(one.next, t)
+        self.assertIsNone(t.next)
+
 
 if __name__ == "__main__":
     unittest.main()

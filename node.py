@@ -36,3 +36,20 @@ class Node:
             current = next
 
         return previous
+
+    def zip_lists(self, other):
+        current_1 = self
+        current_2 = other
+
+        while current_1 is not None and current_2 is not None:
+            next_1 = current_1.next
+            next_2 = current_2.next
+
+            current_1.next = current_2
+            if next_1 is not None:
+                current_2.next = next_1
+
+            current_1 = next_1
+            current_2 = next_2
+
+        return self
